@@ -13,6 +13,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:igdb_client/igdb_client.dart';
 
 part 'package:gamendar/src/app/app.dart';
+part 'package:gamendar/src/app/themes.dart';
 
 part 'package:gamendar/src/components/paginated_infinite_scroll_view.dart';
 part 'package:gamendar/src/components/release_date_card.dart';
@@ -27,4 +28,6 @@ part 'package:gamendar/src/services/api_keys.dart';
 part 'package:gamendar/src/services/game_service_client.dart';
 part 'package:gamendar/src/services/google_http_client.dart';
 part 'package:gamendar/src/services/google_calendar_client.dart';
+
+part 'package:gamendar/src/utils/datetime_helper.dart';
 

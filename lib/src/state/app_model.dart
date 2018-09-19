@@ -2,6 +2,9 @@ part of gamendar;
 
 class AppModel extends Model {
 
+  CustomTheme _theme;
+  CustomTheme get theme => _theme;
+
   GoogleSignInAccount _gUser;
   GoogleSignInAccount get gUser => _gUser;
   GoogleSignIn _gSignIn = GoogleSignIn(
@@ -12,8 +15,11 @@ class AppModel extends Model {
   );
 
   AppModel() {
+    _theme = new CustomTheme();
     loginSilent();
   }
+
+  static AppModel of(BuildContext context) => ScopedModel.of<AppModel>(context);
 
   Future<bool> loginSilent() async {
     _gUser = await _gSignIn.signInSilently();

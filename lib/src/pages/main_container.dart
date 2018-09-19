@@ -11,7 +11,6 @@ class MainContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(
-      title: Text('Gamendar'),
       actions: <Widget>[
         IconButton(
           icon: Icon(Icons.settings),

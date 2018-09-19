@@ -12,9 +12,7 @@ class AppWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MaterialApp(
     title: 'Gamendar',
-    theme: ThemeData(
-      primarySwatch: Colors.blue,
-    ),
+    theme: AppModel.of(context).theme.getThemeData(),
     home: MainContainer(),
   );
 }
