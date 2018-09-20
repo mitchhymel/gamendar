@@ -8,10 +8,11 @@ class ReleaseDateCard extends StatelessWidget {
   Widget build(BuildContext context) => Card(
     child: Row(
       children: <Widget>[
-        Image.network(
-          date.gameExpanded.cover.getImageUrl(IGDBImageSizes.HD720P, isRetina: true),
+        GameImage(
+          game: date.gameExpanded,
           height: 100.0,
-          width: 100.0
+          width: 100.0,
+          source: 'homepage${date.id}',
         ),
         Flexible(
           child: Column(

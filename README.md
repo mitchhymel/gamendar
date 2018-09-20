@@ -8,6 +8,7 @@ This app is sort of a fork of my other app [Gametime](https://github.com/mitchhy
 
 [Flutter](https://flutter.io/) as the cross platform framework the app UI is built on.
 
+[scoped_model](https://github.com/brianegan/scoped_model) for state management
 
 # Dependencies
 

@@ -63,12 +63,12 @@ class _PaginatedInfiniteScrollViewState<T>
   }
 
   Widget _buildProgressIndicator() {
-    return new Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: new Center(
-        child: new Opacity(
+    return Padding(
+      padding: EdgeInsets.all(8.0),
+      child: Center(
+        child: Opacity(
           opacity: this.request != null ? 1.0 : 0.0,
-          child: new CircularProgressIndicator(),
+          child: CircularProgressIndicator(),
         ),
       ),
     );
@@ -102,7 +102,7 @@ class _PaginatedInfiniteScrollViewState<T>
       itemBuilder: itemBuilder,
     );
 
-    return new RefreshIndicator(
+    return RefreshIndicator(
       child: listView,
       onRefresh: onRefresh,
     );

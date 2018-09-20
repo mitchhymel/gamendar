@@ -18,6 +18,22 @@ class MainContainer extends StatelessWidget {
         )
       ],
     ),
-    body: RecentReleasesPage(),
+    body: Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topRight,
+          end: Alignment.bottomLeft,
+          stops: [
+            0.3,
+            0.6
+          ],
+          colors: [
+            Colors.redAccent[200],
+            Colors.orangeAccent,
+          ]
+        )
+      ),
+      child: RecentReleasesPage(),
+    )
   );
 }
