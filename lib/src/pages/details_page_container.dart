@@ -1,15 +1,15 @@
 part of gamendar;
 
-class DetailsPage extends StatefulWidget {
+class DetailsPageContainer extends StatefulWidget {
   final Game game;
   final String source;
-  DetailsPage({@required this.game, this.source=''});
+  DetailsPageContainer({@required this.game, this.source=''});
 
   @override
   _DetailsPageState createState() => new _DetailsPageState(game: this.game, source: this.source);
 }
 
-class _DetailsPageState extends State<DetailsPage> with SingleTickerProviderStateMixin {
+class _DetailsPageState extends State<DetailsPageContainer> with SingleTickerProviderStateMixin {
   final Game game;
   final String source;
   ScrollController _scrollController;
@@ -119,7 +119,7 @@ class _DetailsPageState extends State<DetailsPage> with SingleTickerProviderStat
                           handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
                         ),
                         SliverToBoxAdapter(
-                          child: Container(),
+                          child: DetailsPageBody(),
                         ),
                       ]
                   );
