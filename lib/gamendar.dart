@@ -19,6 +19,7 @@ part 'package:gamendar/src/app/themes.dart';
 part 'package:gamendar/src/components/paginated_infinite_scroll_view.dart';
 part 'package:gamendar/src/components/release_date_card.dart';
 part 'package:gamendar/src/components/game_image.dart';
+part 'package:gamendar/src/components/custom_appbar_scaffold.dart';
 
 part 'package:gamendar/src/pages/settings_page.dart';
 part 'package:gamendar/src/pages/recent_releases_page.dart';

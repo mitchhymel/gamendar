@@ -15,7 +15,7 @@ class AppModel extends Model {
   );
 
   AppModel() {
-    _theme = new CustomTheme();
+    _theme = new SunsetTheme();
     loginSilent();
   }
 
