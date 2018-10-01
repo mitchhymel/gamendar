@@ -2,7 +2,7 @@ part of gamendar;
 
 class GoogleCalendarClient {
 
-  CalendarApi api;
+  static CalendarApi api;
   String _gameTimeCalendarId;
   static const String _GAMENDAR_CALENDAR_NAME = 'Gamendar - Release Dates';
 
@@ -17,6 +17,10 @@ class GoogleCalendarClient {
     final authHeaders = await gsa.authHeaders;
     final httpClient = new GoogleHttpClient(authHeaders);
     api = new CalendarApi(httpClient);
+  }
+
+  logout() {
+    api = null;
   }
 
   Future<String> _getCalendarId() async {

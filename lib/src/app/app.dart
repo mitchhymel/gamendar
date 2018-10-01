@@ -2,10 +2,12 @@ part of gamendar;
 
 class App extends StatelessWidget {
   @override
-  Widget build(BuildContext context) => ScopedModel<AppModel>(
-      model: AppModel(),
-      child: AppWidget()
-  );
+  Widget build(BuildContext context) {
+    return  ScopedModel<AppModel>(
+        model: AppModel(),
+        child: AppWidget()
+    );
+  }
 }
 
 class AppWidget extends StatelessWidget {

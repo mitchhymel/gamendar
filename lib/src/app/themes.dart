@@ -1,5 +1,27 @@
 part of gamendar;
 
+class ThemeHelper {
+
+  static Color getCardColorForPlatform(ReleaseDate date) {
+    switch (date.platform) {
+      case Platforms.NINTENDO_3DS:
+        return Colors.lightBlueAccent;
+      case Platforms.SWITCH:
+        return Colors.red;
+      case Platforms.PLAYSTATION_4:
+      case Platforms.PLAYSTATION_3:
+      case Platforms.PLAYSTATION_2:
+        return Colors.blueAccent;
+      case Platforms.XBOX_ONE:
+      case Platforms.XBOX_360:
+      case Platforms.XBOX:
+        return Colors.green;
+      default:
+        return Colors.indigoAccent;
+    }
+  }
+}
+
 class SunsetTheme extends CustomTheme {
 
   @override
@@ -7,6 +29,24 @@ class SunsetTheme extends CustomTheme {
     return ThemeData(
       primaryColor: Colors.redAccent,
       accentColor: Colors.orangeAccent,
+      cardColor: Color(0xfffafafa),
+      scaffoldBackgroundColor: Colors.orangeAccent,
+      textTheme: TextTheme(
+        title: TextStyle(
+          color: Colors.white,
+        ),
+        headline: TextStyle(
+          color: Colors.redAccent[200],
+        ),
+        body2: new TextStyle(
+          color: Colors.white,
+          fontSize: 14.0,
+        ),
+        body1: new TextStyle(
+          color: Colors.orangeAccent,
+          fontSize: 14.0,
+        ),
+      )
     );
   }
 }
@@ -23,18 +63,6 @@ class PurpleBlueTheme extends CustomTheme {
   );
 }
 
-class OrangeRedTheme extends CustomTheme {
-  OrangeRedTheme() : super(
-    name: 'Orange and red',
-    primary: new Color(0xff4527a0),
-    primaryLight: new Color(0xff7953d2),
-    primaryDark: new Color(0xff000070),
-    secondary: new Color(0xffef5350),
-    secondaryLight: new Color(0xffff867c),
-    secondaryDark: new Color(0xffb61827),
-  );
-}
-
 abstract class CustomTheme {
   final String name;
   final Color primary;
@@ -47,7 +75,6 @@ abstract class CustomTheme {
   static List<CustomTheme> getAllThemes() {
     return [
       new PurpleBlueTheme(),
-      new OrangeRedTheme()
     ];
   }
 

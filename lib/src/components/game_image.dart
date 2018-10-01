@@ -25,7 +25,7 @@ class GameImage extends StatelessWidget {
   _onTap(BuildContext context, Game result) {
     Navigator.of(context).push(new MaterialPageRoute<Null>(
         builder: (BuildContext context) {
-          return new DetailsPage(
+          return new DetailsPageContainer(
             game: result,
             source: this.source,
           );
@@ -74,9 +74,9 @@ class GameImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return toDetail ? InkWell(
         onTap: toDetail ? () => _onTap(context, game) : () {},
         child: _getImage()
-    );
+    ) : _getImage();
   }
 }

@@ -14,8 +14,16 @@ class AppModel extends Model {
       ]
   );
 
+  List<Query> _queries;
+  List<Query> get queries => _queries;
+
+  Query _selectedQuery;
+  Query get selectedQuery => _selectedQuery;
+
   AppModel() {
     _theme = new SunsetTheme();
+    _queries = [Query.getRecentlyReleasedQuery()];
+    _selectedQuery = _queries.first;
     loginSilent();
   }
 
@@ -24,6 +32,7 @@ class AppModel extends Model {
   Future<bool> loginSilent() async {
     _gUser = await _gSignIn.signInSilently();
     if (_gUser != null) {
+      GoogleCalendarClient().init(_gUser);
       notifyListeners();
       return true;
     }
@@ -46,11 +55,22 @@ class AppModel extends Model {
   Future<bool> logout() async {
     _gUser = await _gSignIn.signOut();
     if (_gUser == null) {
+      GoogleCalendarClient().logout();
       notifyListeners();
       return true;
     }
     else {
       return false;
     }
+  }
+
+  void addQuery(Query query) {
+    _queries.add(query);
+    notifyListeners();
+  }
+
+  void removeQuery(Query query) {
+    _queries.remove(query);
+    notifyListeners();
   }
 }

@@ -1,11 +1,11 @@
 part of gamendar;
 
-class ReleaseDateCard extends StatelessWidget {
-  final ReleaseDate date;
+class GameCard extends StatelessWidget {
+  final Game game;
 
-  ReleaseDateCard(this.date);
+  GameCard(this.game);
 
-  String _getSource() => 'releases${date.id}';
+  String _getSource() => 'releases${game.id}';
 
   _onTap(BuildContext context, Game game) {
     Navigator.of(context).push(new MaterialPageRoute<Null>(
@@ -22,7 +22,7 @@ class ReleaseDateCard extends StatelessWidget {
     String imageUrl = AssetHelper.getImageUrlFromGame(game);
     return  DecorationImage(
       image: imageUrl == null ?
-       AssetImage(AssetHelper.ImagePlaceholderPath)
+      AssetImage(AssetHelper.ImagePlaceholderPath)
           :  NetworkImage(imageUrl),
       fit: BoxFit.cover,
     );
@@ -51,45 +51,45 @@ class ReleaseDateCard extends StatelessWidget {
   );
 
   Widget _getCard(BuildContext context, String cardTag, Game game) => Hero(
-      tag: cardTag,
-      child: Container(
-          margin: EdgeInsets.only(left: 16.0, right: 16.0),
-          decoration: BoxDecoration(
-              color: Theme.of(context).cardColor,
-              shape: BoxShape.rectangle,
-              borderRadius: BorderRadius.circular(8.0),
-              boxShadow: <BoxShadow>[
-                BoxShadow(
-                  color: Colors.black87,
-                  blurRadius: 5.0,
-                  offset: Offset(0.0, 7.0),
-                )
-              ]
-          ),
-          child: Container(
-              margin: EdgeInsets.only(left: 72.0, top: 16.0),
-              constraints: BoxConstraints.expand(),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Text(game.name, style: Theme.of(context).textTheme.headline,),
-                  Container(height:15.0),
-                  Column(
-                    children: <Widget>[
+    tag: cardTag,
+    child: Container(
+        margin: EdgeInsets.only(left: 16.0, right: 16.0),
+        decoration: BoxDecoration(
+            color: Theme.of(context).cardColor,
+            shape: BoxShape.rectangle,
+            borderRadius: BorderRadius.circular(8.0),
+            boxShadow: <BoxShadow>[
+              BoxShadow(
+                color: Colors.black87,
+                blurRadius: 5.0,
+                offset: Offset(0.0, 7.0),
+              )
+            ]
+        ),
+        child: Container(
+            margin: EdgeInsets.only(left: 72.0, top: 16.0),
+            constraints: BoxConstraints.expand(),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Text(game.name, style: Theme.of(context).textTheme.headline,),
+                Container(height:15.0),
+                Column(
+                  children: <Widget>[
 //                        new Icon(Icons.timer, size: 20.0, color: Colors.white),
 //                        new Container(width: 4.0),
 //                        new Text(DateTimeHelper.getDurationInHoursMins(recentGame.totalPlaytime)),
 //                        new Container(width: 32.0),
-                      Text(DateTimeHelper.getMonthDay(date.date)),
-                      Text(date.platform.name),
-                      Text(date.region.name),
-                    ],
-                  )
-                ],
-              )
-          )
-      ),
+//                    Text(DateTimeHelper.getMonthDay(game.releaseDates.first.date)),
+//                    Text(game.releaseDates.first.platform.name),
+//                    Text(game.releaseDates.first.region.name),
+                  ],
+                )
+              ],
+            )
+        )
+    ),
   );
 
   @override
@@ -101,11 +101,11 @@ class ReleaseDateCard extends StatelessWidget {
         width: width,
         padding: EdgeInsets.all(8.0),
         child: GestureDetector(
-          onTap: () => _onTap(context, date.gameExpanded),
+          onTap: () => _onTap(context, game),
           child: Stack(
             children: <Widget>[
-              _getCard(context, 'card${date.id}', date.gameExpanded),
-              _getThumbnail(context, date.gameExpanded),
+              _getCard(context, 'card${game.id}', game),
+              _getThumbnail(context, game),
               //_getButton(context),
             ],
           ),

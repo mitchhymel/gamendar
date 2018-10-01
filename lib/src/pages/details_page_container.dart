@@ -6,15 +6,15 @@ class DetailsPageContainer extends StatefulWidget {
   DetailsPageContainer({@required this.game, this.source=''});
 
   @override
-  _DetailsPageState createState() => new _DetailsPageState(game: this.game, source: this.source);
+  _DetailsPageContainerState createState() => new _DetailsPageContainerState(game: this.game, source: this.source);
 }
 
-class _DetailsPageState extends State<DetailsPageContainer> with SingleTickerProviderStateMixin {
+class _DetailsPageContainerState extends State<DetailsPageContainer> with SingleTickerProviderStateMixin {
   final Game game;
   final String source;
   ScrollController _scrollController;
 
-  _DetailsPageState({@required this.game, @required this.source});
+  _DetailsPageContainerState({@required this.game, @required this.source});
 
   @override
   void initState() {
@@ -75,7 +75,7 @@ class _DetailsPageState extends State<DetailsPageContainer> with SingleTickerPro
                         Colors.transparent,
                         Theme.of(context).primaryColor
                       ],
-                      stops: [0.0, 0.95],
+                      stops: [0.0, 0.99],
                       begin: const FractionalOffset(0.0, 0.0),
                       end: const FractionalOffset(0.0, 1.0),
                     )
@@ -99,34 +99,56 @@ class _DetailsPageState extends State<DetailsPageContainer> with SingleTickerPro
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    body: NestedScrollView(
-        headerSliverBuilder: (context, innerBoxIsScrolled) {
-          return <Widget>[
-            SliverOverlapAbsorber(
-              handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
-              child: _getCustomAppBar(context, game),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              stops: [
+                0.3,
+                1.0
+              ],
+              colors: [
+                Theme.of(context).primaryColor,
+                Theme.of(context).accentColor,
+              ]
+          ),
+        ),
+        child: NestedScrollView(
+            headerSliverBuilder: (context, innerBoxIsScrolled) {
+              return <Widget>[
+                SliverOverlapAbsorber(
+                  handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
+                  child: _getCustomAppBar(context, game),
+                )
+              ];
+            },
+            body: SafeArea(
+                top: false,
+                bottom: false,
+                child: Builder(
+                    builder: (context) {
+                      return CustomScrollView(
+                          slivers: <Widget>[
+                            SliverOverlapInjector(
+                              handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
+                            ),
+                            SliverToBoxAdapter(
+                              child: DetailsPageBody(game: game),
+                            ),
+                          ]
+                      );
+                    }
+                )
             )
-          ];
-        },
-        body: SafeArea(
-            top: false,
-            bottom: false,
-            child: Builder(
-                builder: (context) {
-                  return CustomScrollView(
-                      slivers: <Widget>[
-                        SliverOverlapInjector(
-                          handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
-                        ),
-                        SliverToBoxAdapter(
-                          child: DetailsPageBody(),
-                        ),
-                      ]
-                  );
-                }
-            )
-        )
-    ),
+        ),
+      ),
+//    floatingActionButton: FloatingActionButton(
+//        onPressed: () => print('ay'),
+//       child: Icon(Icons.calendar_today),
+//      foregroundColor: Colors.white,
+//      backgroundColor: Theme.of(context).primaryColor,
+//    ),
     //floatingActionButton: new GameDetailFabDial(game: game),
   );
 }
