@@ -2,22 +2,30 @@ part of gamendar;
 
 class ThemeHelper {
 
+  static Color getCardColorForGame(Game game) {
+    if (game.releaseDates == null || game.releaseDates.length == 0) {
+      return Colors.blueGrey;
+    }
+
+    return getCardColorForPlatform(game.releaseDates.first);
+  }
+
   static Color getCardColorForPlatform(ReleaseDate date) {
     switch (date.platform) {
-      case Platforms.NINTENDO_3DS:
+      case IGDBPlatforms.NINTENDO_3DS:
         return Colors.lightBlueAccent;
-      case Platforms.SWITCH:
+      case IGDBPlatforms.SWITCH:
         return Colors.red;
-      case Platforms.PLAYSTATION_4:
-      case Platforms.PLAYSTATION_3:
-      case Platforms.PLAYSTATION_2:
+      case IGDBPlatforms.PLAYSTATION_4:
+      case IGDBPlatforms.PLAYSTATION_3:
+      case IGDBPlatforms.PLAYSTATION_2:
         return Colors.blueAccent;
-      case Platforms.XBOX_ONE:
-      case Platforms.XBOX_360:
-      case Platforms.XBOX:
+      case IGDBPlatforms.XBOX_ONE:
+      case IGDBPlatforms.XBOX_360:
+      case IGDBPlatforms.XBOX:
         return Colors.green;
       default:
-        return Colors.indigoAccent;
+        return Colors.blueGrey;
     }
   }
 }
@@ -36,14 +44,14 @@ class SunsetTheme extends CustomTheme {
           color: Colors.white,
         ),
         headline: TextStyle(
-          color: Colors.redAccent[200],
+          color: Colors.white //Colors.redAccent[200],
         ),
         body2: new TextStyle(
           color: Colors.white,
           fontSize: 14.0,
         ),
         body1: new TextStyle(
-          color: Colors.orangeAccent,
+          color: Colors.white, //Colors.orangeAccent,
           fontSize: 14.0,
         ),
       )

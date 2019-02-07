@@ -8,7 +8,7 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
 
-  String _search = null;
+  String _search;
 
   _onSubmitted(String value) async {
     setState(() {
@@ -20,7 +20,7 @@ class _SearchPageState extends State<SearchPage> {
     GameServiceClient client = new GameServiceClient();
 
     return await client.games(
-        new RequestParameters(
+        new IGDBRequestParameters(
           search: _search,
           limit: pageSize,
           offset: page*pageSize,

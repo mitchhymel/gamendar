@@ -34,7 +34,7 @@ class _GameDetailScreenshotsCardState extends State<GameDetailScreenshotsCard> w
   }
 
   Widget _getScreenshotItem(BuildContext context, int i) {
-    IGDBImage image = widget.game.screenshots[i];
+    ImageModel image = widget.game.screenshots[i];
     return new InkWell(
       onTap: () {
         showDialog(
@@ -44,7 +44,7 @@ class _GameDetailScreenshotsCardState extends State<GameDetailScreenshotsCard> w
                 <ImageProvider>[]..addAll(
                   widget.game.screenshots.map(
                     (i) =>  new NetworkImage(
-                      i.getImageUrl(IGDBImageSizes.HD720P),
+                      AssetHelper.getImageUrlFromImage(i),
                     )
                   )
                 ),
@@ -61,7 +61,7 @@ class _GameDetailScreenshotsCardState extends State<GameDetailScreenshotsCard> w
       },
       child: FadeInImage.assetNetwork(
         placeholder: AssetHelper.ImagePlaceholderPath,
-        image: image.getImageUrl(IGDBImageSizes.HD720P),
+        image: AssetHelper.getImageUrlFromImage(image),
         width: MediaQuery.of(context).size.width * .75,
       ),
     );

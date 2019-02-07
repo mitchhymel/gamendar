@@ -45,10 +45,8 @@ class _PaginatedInfiniteScrollViewState<T>
     int page = (items.length / widget.pageSize).floor();
     List<T> fetched = await widget.pageRequest(page, widget.pageSize);
     if (mounted) {
+
       this.setState(() {
-//        debugPrint(fetched.length.toString());
-//        fetched.removeWhere((e) => items.contains(e));
-//        debugPrint(fetched.length.toString());
         items.addAll(fetched);
       });
     }

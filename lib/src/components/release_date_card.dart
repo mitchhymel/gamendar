@@ -28,6 +28,17 @@ class ReleaseDateCard extends StatelessWidget {
     );
   }
 
+  Widget getShimmerImage(Game game) {
+    String imageUrl = AssetHelper.getImageUrlFromGame(game);
+    if (imageUrl == null) {
+      return Image.asset(AssetHelper.ImagePlaceholderPath);
+    }
+
+    return ShimmerAsyncImage(
+      image: Image.network(imageUrl),
+    );
+  }
+
   Widget _getThumbnail(BuildContext context, Game game) => Container(
     alignment: FractionalOffset(0.0, 0.5),
     margin: EdgeInsets.only(left: 0.0),
@@ -36,6 +47,7 @@ class ReleaseDateCard extends StatelessWidget {
       child: Container(
         width: 80.0,
         height: 80.0,
+        //child: getShimmerImage(game),
         decoration: BoxDecoration(
             image: getImage(game),
             borderRadius: BorderRadius.all(
@@ -55,7 +67,7 @@ class ReleaseDateCard extends StatelessWidget {
       child: Container(
           margin: EdgeInsets.only(left: 16.0, right: 16.0),
           decoration: BoxDecoration(
-              color: Theme.of(context).cardColor,
+              color: ThemeHelper.getCardColorForPlatform(date),
               shape: BoxShape.rectangle,
               borderRadius: BorderRadius.circular(8.0),
               boxShadow: <BoxShadow>[
@@ -73,7 +85,11 @@ class ReleaseDateCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
-                  Text(game.name, style: Theme.of(context).textTheme.headline,),
+                  AutoSizeText(
+                    game.name,
+                    style: Theme.of(context).textTheme.headline,
+                    maxLines: 2,
+                  ),
                   Container(height:15.0),
                   Column(
                     children: <Widget>[
@@ -96,16 +112,21 @@ class ReleaseDateCard extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height/4;
     double width = MediaQuery.of(context).size.width;
+
+    if (date.game == null) {
+      return Container();
+    }
+
     return Container(
         height: height,
         width: width,
         padding: EdgeInsets.all(8.0),
         child: GestureDetector(
-          onTap: () => _onTap(context, date.gameExpanded),
+          onTap: () => _onTap(context, date.game),
           child: Stack(
             children: <Widget>[
-              _getCard(context, 'card${date.id}', date.gameExpanded),
-              _getThumbnail(context, date.gameExpanded),
+              _getCard(context, 'card${date.id}', date.game),
+              _getThumbnail(context, date.game),
               //_getButton(context),
             ],
           ),

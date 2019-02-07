@@ -4,10 +4,15 @@ class AssetHelper {
   static final String ImagePlaceholderPath = 'assets/img/placeholder.png';
 
   static String getImageUrlFromGame(Game game) {
-    if (game.cover == null) {
+    return getImageUrlFromImage(game.cover);
+  }
+
+  static String getImageUrlFromImage(ImageModel image) {
+    if (image == null || image.imageId == null) {
       return null;
     }
 
-    return game.cover.getImageUrl(IGDBImageSizes.HD720P, isRetina: true);
+    return IGDBClient.getImageUrl(image.imageId, IGDBImageSizes.HD720P,
+      isRetina: true);
   }
 }

@@ -7,22 +7,22 @@ class QueryPage extends StatelessWidget {
   Future<List> _requestData(int page, int pageSize) async {
     GameServiceClient client = new GameServiceClient();
 
-    RequestParameters params = query.params.copyWith(
+    IGDBRequestParameters params = query.params.copyWith(
       limit: pageSize,
       offset: page * pageSize,
     );
 
-    if (query.endpoint == Endpoints.GAMES) {
+    if (query.endpoint == IGDBEndpoints.GAMES) {
       return await client.games(params);
     }
     else {
-      return await client.releaseDates(params, expandGame: true);
+      return await client.releaseDates(params);
     }
   }
 
-  Widget _getWidget(dynamic obj) => query.endpoint == Endpoints.GAMES ?
+  Widget _getWidget(dynamic obj) => query.endpoint == IGDBEndpoints.GAMES ?
       GameCard(obj) : ReleaseDateCard(obj);
-
+      
   @override
   Widget build(BuildContext context) => PaginatedInfiniteScrollView(
     pageRequest: _requestData,

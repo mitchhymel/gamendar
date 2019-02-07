@@ -51,6 +51,7 @@ class _DetailsPageContainerState extends State<DetailsPageContainer> with Single
               width: fadedImageWidth,
               height: fadedImageHeight,
               fit: BoxFit.cover,
+              toDetail: false,
             ),
             ClipRect(
               child: BackdropFilter(
@@ -89,6 +90,7 @@ class _DetailsPageContainerState extends State<DetailsPageContainer> with Single
                 height: clearImageHeight,
                 heroTag: game.id.toString() + source,
                 fit: BoxFit.scaleDown,
+                toDetail: false,
               )
             ),
           ],

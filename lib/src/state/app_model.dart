@@ -44,6 +44,7 @@ class AppModel extends Model {
   Future<bool> login() async {
     _gUser = await _gSignIn.signIn();
     if (_gUser != null) {
+      GoogleCalendarClient().init(_gUser);
       notifyListeners();
       return true;
     }

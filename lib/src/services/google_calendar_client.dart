@@ -51,6 +51,7 @@ class GoogleCalendarClient {
     }
 
     Event event = new Event();
+    event.transparency = 'transparent';
     event.summary = '$title released on $platform';
     EventDateTime start = new EventDateTime();
     start.date = date;
