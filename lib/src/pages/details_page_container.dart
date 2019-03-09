@@ -88,7 +88,7 @@ class _DetailsPageContainerState extends State<DetailsPageContainer> with Single
                 game: game,
                 width: clearImageWidth,
                 height: clearImageHeight,
-                heroTag: game.id.toString() + source,
+                heroTag: '', //game.id.toString() + source,
                 fit: BoxFit.scaleDown,
                 toDetail: false,
               )

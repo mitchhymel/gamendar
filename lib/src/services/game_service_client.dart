@@ -1,18 +1,17 @@
 part of gamendar;
 
-class GameServiceClient extends IGDBClient {
+class GameServiceClient {
+
+  final IGDBClient _client = new IGDBClient(
+    MY_API_KEY,
+    USER_AGENT,
+  );
 
   static final GameServiceClient _singleton = new GameServiceClient._internal();
   factory GameServiceClient() {
     return _singleton;
   }
-
-  GameServiceClient._internal() : super(
-      MY_USER_AGENT,
-      MY_API_KEY,
-      printRequests: true,
-      printResponses: false,
-  );
+  GameServiceClient._internal();
 
   final List<String> GAME_PARAMS = [
     'name',
@@ -34,16 +33,19 @@ class GameServiceClient extends IGDBClient {
     'videos.video_id',
   ];
 
-  @override
   Future<List<Game>> games(IGDBRequestParameters params) async {
     IGDBRequestParameters newParams = params.copyWith(
       fields: GAME_PARAMS,
     );
-    List<dynamic> result = await requestByEndpoint(IGDBEndpoints.GAMES, newParams);
-    return result.map((m) => Game.fromMap(m)).toList();
+    IGDBResponse result = await _client.games(newParams);
+    if (result.isSuccess()) {
+      return result.data.map((m) => Game.fromMap(m)).toList();
+    }
+    else {
+      return [];
+    }
   }
 
-  @override
   Future<List<ReleaseDate>> releaseDates(IGDBRequestParameters params) async {
     IGDBRequestParameters newParams = params.copyWith(
       fields: [
@@ -68,8 +70,13 @@ class GameServiceClient extends IGDBClient {
         'game.release_dates.platform',
       ],
     );
-    List<dynamic> result = await requestByEndpoint(IGDBEndpoints.RELEASE_DATES, newParams);
-    return result.map((m) => ReleaseDate.fromMap(m)).toList();
+    IGDBResponse result = await _client.releaseDates(newParams);
+    if (result.isSuccess()) {
+      return result.data.map((m) => ReleaseDate.fromMap(m)).toList();
+    }
+    else {
+      return [];
+    }
   }
 
   Future<List<Game>> gamesFromReleaseDates(IGDBRequestParameters params) async {
@@ -79,16 +86,22 @@ class GameServiceClient extends IGDBClient {
         'game.id'
       ]
     );
-    List<dynamic> result = await requestByEndpoint(IGDBEndpoints.RELEASE_DATES, newParams);
-    List<String> gameIds = result.map((r) => r['game']['id'].toString()).toList();
+    IGDBResponse result = await _client.releaseDates(newParams);
+    if (!result.isSuccess()) {
+      return [];
+    }
+    List<String> gameIds = result.data.map((r) => r['game']['id'].toString()).toList();
     List<String> deduped = gameIds.toSet().toList();
     print(deduped); // remove dupes
     IGDBRequestParameters gameParams = new IGDBRequestParameters(
       fields: GAME_PARAMS,
       ids: deduped,
     );
-    List<dynamic> gameResult = await requestByEndpoint(IGDBEndpoints.GAMES, gameParams);
-    return gameResult.map((m) => Game.fromMap(m)).toList();
+    IGDBResponse gameResult = await _client.games(gameParams);
+    if (!gameResult.isSuccess()) {
+      return [];
+    }
+    return gameResult.data.map((m) => Game.fromMap(m)).toList();
   }
 
 
