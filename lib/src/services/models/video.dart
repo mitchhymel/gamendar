@@ -18,6 +18,8 @@ class Video {
       return new List<Video>();
     }
 
-    return maps.map((m) => fromMap(m)).toList();
+    return maps
+        .whereType<Map>()
+        .map((m) => fromMap(m)).toList();
   }
 }

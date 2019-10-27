@@ -30,45 +30,44 @@ class ThemeHelper {
   }
 }
 
-class SunsetTheme extends CustomTheme {
+class DarkTheme extends CustomTheme {
+  DarkTheme(): super(
+    name: 'Dark',
+    primary: new Color(0xff212121),
+    primaryLight: new Color(0xff484848),
+    primaryDark: new Color(0xff1c313a),
+    secondary: new Color(0xfff44336),
+    secondaryLight: new Color(0xffff7961),
+    secondaryDark: new Color(0xffba000d)
+  );
 
   @override
   ThemeData getThemeData() {
     return ThemeData(
-      primaryColor: Colors.redAccent,
-      accentColor: Colors.orangeAccent,
-      cardColor: Color(0xfffafafa),
-      scaffoldBackgroundColor: Colors.orangeAccent,
-      textTheme: TextTheme(
-        title: TextStyle(
-          color: Colors.white,
-        ),
-        headline: TextStyle(
-          color: Colors.white //Colors.redAccent[200],
-        ),
-        body2: new TextStyle(
-          color: Colors.white,
-          fontSize: 14.0,
-        ),
-        body1: new TextStyle(
-          color: Colors.white, //Colors.orangeAccent,
-          fontSize: 14.0,
-        ),
-      )
+        primaryColor: this.primary,
+        primaryColorLight: this.primaryLight,
+        primaryColorDark: this.primaryDark,
+        accentColor: this.secondary,
+        cardColor: this.primaryLight,
+        scaffoldBackgroundColor: this.primaryDark,
+        textTheme: TextTheme(
+          title: TextStyle(
+            color: Colors.white,
+          ),
+          headline: TextStyle(
+            color: Colors.white, //Colors.redAccent[200],,
+          ),
+          body2: new TextStyle(
+            color: Colors.white,
+            fontSize: 14.0,
+          ),
+          body1: new TextStyle(
+            color: Colors.white, //Colors.orangeAccent,
+            fontSize: 14.0,
+          ),
+        )
     );
   }
-}
-
-class PurpleBlueTheme extends CustomTheme {
-  PurpleBlueTheme() : super(
-      name: 'Deep purple and blue',
-      primary: new Color(0xff512da8),
-      primaryLight: new Color(0xff8559da),
-      primaryDark: new Color(0xff140078),
-      secondary: new Color(0xff00e5ff),
-      secondaryLight: new Color(0xff000000),
-      secondaryDark: new Color(0xff000000)
-  );
 }
 
 abstract class CustomTheme {
@@ -82,7 +81,7 @@ abstract class CustomTheme {
 
   static List<CustomTheme> getAllThemes() {
     return [
-      new PurpleBlueTheme(),
+      new DarkTheme(),
     ];
   }
 

@@ -44,6 +44,11 @@ class _PaginatedInfiniteScrollViewState<T>
   Future loadNext() async {
     int page = (items.length / widget.pageSize).floor();
     List<T> fetched = await widget.pageRequest(page, widget.pageSize);
+    if (fetched == null || fetched.length == 0) {
+      print('stop loading because we fetched nothing');
+      return;
+    }
+
     if (mounted) {
 
       this.setState(() {

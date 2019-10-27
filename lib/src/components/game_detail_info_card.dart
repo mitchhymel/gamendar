@@ -15,7 +15,7 @@ class GameDetailInfoCard extends StatelessWidget {
           elevation: 4.0,
           child: Text(
             game.summary ?? 'No description available.',
-            style: Theme.of(context).textTheme.body1.copyWith(color: Theme.of(context).primaryColor),
+            style: Theme.of(context).textTheme.body1,
           ),
         )
       ],

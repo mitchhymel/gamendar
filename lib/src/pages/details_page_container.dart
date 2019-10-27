@@ -112,7 +112,7 @@ class _DetailsPageContainerState extends State<DetailsPageContainer> with Single
               ],
               colors: [
                 Theme.of(context).primaryColor,
-                Theme.of(context).accentColor,
+                Theme.of(context).primaryColorDark,
               ]
           ),
         ),

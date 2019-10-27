@@ -69,7 +69,11 @@ class GameCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              Text(game.name, style: Theme.of(context).textTheme.headline,),
+              AutoSizeText(
+                game.name,
+                maxLines: 2,
+                style: Theme.of(context).textTheme.headline,
+              ),
               Container(height:15.0),
               (game.releaseDates == null || game.releaseDates.length == 0) ? Container() : Column(
                 children: <Widget>[

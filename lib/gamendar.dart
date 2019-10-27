@@ -4,6 +4,7 @@ import 'dart:async';
 import 'package:http/http.dart';
 import 'package:meta/meta.dart';
 import 'dart:ui' as dartui;
+import 'package:http/io_client.dart';
 
 import 'package:flutter/material.dart';
 
@@ -34,6 +35,8 @@ part 'package:gamendar/src/components/release_date_card.dart';
 part 'package:gamendar/src/components/confirmation_dialog.dart';
 part 'package:gamendar/src/components/async_confirmation_dialog.dart';
 part 'package:gamendar/src/components/shimmer_async_image.dart';
+part 'package:gamendar/src/components/settings_page_component.dart';
+part 'package:gamendar/src/components/google_login_component.dart';
 
 part 'package:gamendar/src/pages/settings_page.dart';
 part 'package:gamendar/src/pages/main_container.dart';
@@ -42,6 +45,7 @@ part 'package:gamendar/src/pages/details_page_body.dart';
 part 'package:gamendar/src/pages/edit_query_page.dart';
 part 'package:gamendar/src/pages/search_page.dart';
 part 'package:gamendar/src/pages/query_page.dart';
+part 'package:gamendar/src/pages/feed_page.dart';
 
 part 'package:gamendar/src/state/app_model.dart';
 part 'package:gamendar/src/state/query.dart';

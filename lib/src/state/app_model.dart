@@ -21,7 +21,7 @@ class AppModel extends Model {
   Query get selectedQuery => _selectedQuery;
 
   AppModel() {
-    _theme = new SunsetTheme();
+    _theme = new DarkTheme();
     _queries = [Query.getRecentlyReleasedQuery()];
     _selectedQuery = _queries.first;
     loginSilent();
@@ -61,6 +61,7 @@ class AppModel extends Model {
       return true;
     }
     else {
+      debugPrint('error when logging out');
       return false;
     }
   }

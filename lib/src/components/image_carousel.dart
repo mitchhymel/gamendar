@@ -100,13 +100,15 @@ class _CarouselImageState extends State<CarouselImageWidget> {
   void initState() {
     super.initState();
 
-    widget.imageProvider.resolve(new ImageConfiguration()).addListener((i, b) {
+    widget.imageProvider.resolve(new ImageConfiguration()).addListener(ImageStreamListener(
+      (i, b) {
       if (mounted) {
         setState(() {
           _loading = false;
         });
       }
-    });
+    }
+    ));
   }
 
   @override

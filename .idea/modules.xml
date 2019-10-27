@@ -3,8 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/gamendar.iml" filepath="$PROJECT_DIR$/gamendar.iml" />
-      <module fileurl="file://$PROJECT_DIR$/gamendar_android.iml" filepath="$PROJECT_DIR$/gamendar_android.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/igdb_client.iml" filepath="$PROJECT_DIR$/.idea/modules/igdb_client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android/gamendar_android.iml" filepath="$PROJECT_DIR$/android/gamendar_android.iml" />
     </modules>
   </component>
 </project>

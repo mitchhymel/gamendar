@@ -21,11 +21,11 @@ class MainContainer extends StatelessWidget {
           end: Alignment.bottomCenter,
           stops: [
             0.3,
-            0.6
+            0.6,
           ],
           colors: [
-            Theme.of(context).accentColor,
-            Theme.of(context).primaryColor,
+            Theme.of(context).primaryColorLight,
+            Theme.of(context).primaryColorDark,
           ]
       ),
     ),
@@ -42,9 +42,13 @@ class MainContainer extends StatelessWidget {
           onPressed: () => _onSearchClicked(context),
           color: Colors.white,
         ),
+        IconButton(
+          icon: Icon(Icons.settings),
+          onPressed: () => _onSettingsClicked(context),
+          color: Colors.white,
+        )
       ],
     ),
-    drawer: CustomDrawer(),
     body: _getBody(context),
   );
 }

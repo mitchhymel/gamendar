@@ -19,13 +19,13 @@ class ShimmerAsyncImageState extends State<ShimmerAsyncImage> {
   @override
   void initState() {
     super.initState();
-    widget.image.image.resolve(new ImageConfiguration()).addListener((_,__) {
+    widget.image.image.resolve(new ImageConfiguration()).addListener(ImageStreamListener((_,__) {
       if (mounted) {
         setState(() {
           _imageLoaded = true;
         });
       }
-    });
+    }));
   }
 
   @override

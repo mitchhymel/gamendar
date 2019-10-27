@@ -32,16 +32,35 @@ class SettingsPage extends StatelessWidget {
     }
   }
 
+  List<Widget> _getSettingsList(BuildContext context, AppModel model) => <Widget>[
+    Text('IGDB Settings',
+      style: Theme.of(context).textTheme.headline,
+      textAlign: TextAlign.left,
+    ),
+    Text('Regions',
+      style: Theme.of(context).textTheme.body1,
+      textAlign: TextAlign.left,
+    ),
+    Divider(
+      color: Colors.white, //Theme.of(context).accentColor,
+      height: 8.0,
+
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(
       title: Text('Settings'),
     ),
     body: ScopedModelDescendant<AppModel>(
-      builder: (context, child, model) => Column(
-        children: <Widget>[
-          _getGoogleLoginButton(model),
-        ],
+      builder: (context, child, model) => Container(
+        padding: EdgeInsets.symmetric(horizontal: 8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: _getSettingsList(context, model)
+            ..add(GoogleLoginComponent()),
+        ),
       ),
     )
   );

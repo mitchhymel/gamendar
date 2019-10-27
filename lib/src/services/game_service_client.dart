@@ -3,8 +3,8 @@ part of gamendar;
 class GameServiceClient {
 
   final IGDBClient _client = new IGDBClient(
-    MY_API_KEY,
     USER_AGENT,
+    MY_API_KEY,
   );
 
   static final GameServiceClient _singleton = new GameServiceClient._internal();
@@ -33,6 +33,28 @@ class GameServiceClient {
     'videos.video_id',
   ];
 
+  final List<String> RELEASE_DATE_PARAMS = [
+    'date',
+    'platform',
+    'region',
+    'game.name',
+    'game.url',
+    'game.id',
+    'game.summary',
+    'game.cover.image_id',
+    'game.genres.id',
+    'game.genres.name',
+    'game.popularity',
+    'game.rating',
+    'game.rating_count',
+    'game.aggregated_rating',
+    'game.aggregated_rating_count',
+    'game.screenshots.image_id',
+    'game.videos.video_id',
+    'game.release_dates.date',
+    'game.release_dates.platform',
+  ];
+
   Future<List<Game>> games(IGDBRequestParameters params) async {
     IGDBRequestParameters newParams = params.copyWith(
       fields: GAME_PARAMS,
@@ -42,39 +64,21 @@ class GameServiceClient {
       return result.data.map((m) => Game.fromMap(m)).toList();
     }
     else {
+      debugPrint(IGDBHelpers.getPrettyStringFromMap(result.toMap()));
       return [];
     }
   }
 
   Future<List<ReleaseDate>> releaseDates(IGDBRequestParameters params) async {
     IGDBRequestParameters newParams = params.copyWith(
-      fields: [
-        'date',
-        'platform',
-        'region',
-        'game.name',
-        'game.url',
-        'game.id',
-        'game.summary',
-        'game.cover.image_id',
-        'game.genres.id',
-        'game.genres.name',
-        'game.popularity',
-        'game.rating',
-        'game.rating_count',
-        'game.aggregated_rating',
-        'game.aggregated_rating_count',
-        'game.screenshots.image_id',
-        'game.videos.video_id',
-        'game.release_dates.date',
-        'game.release_dates.platform',
-      ],
+      fields: RELEASE_DATE_PARAMS,
     );
     IGDBResponse result = await _client.releaseDates(newParams);
     if (result.isSuccess()) {
       return result.data.map((m) => ReleaseDate.fromMap(m)).toList();
     }
     else {
+      debugPrint(IGDBHelpers.getPrettyStringFromMap(result.toMap()));
       return [];
     }
   }
@@ -88,10 +92,11 @@ class GameServiceClient {
     );
     IGDBResponse result = await _client.releaseDates(newParams);
     if (!result.isSuccess()) {
+      debugPrint(IGDBHelpers.getPrettyStringFromMap(result.toMap()));
       return [];
     }
-    List<String> gameIds = result.data.map((r) => r['game']['id'].toString()).toList();
-    List<String> deduped = gameIds.toSet().toList();
+    List<int> gameIds = result.data.map((r) => r['game']['id']).toList();
+    List<int> deduped = gameIds.toSet().toList();
     print(deduped); // remove dupes
     IGDBRequestParameters gameParams = new IGDBRequestParameters(
       fields: GAME_PARAMS,
@@ -99,6 +104,7 @@ class GameServiceClient {
     );
     IGDBResponse gameResult = await _client.games(gameParams);
     if (!gameResult.isSuccess()) {
+      debugPrint(IGDBHelpers.getPrettyStringFromMap(result.toMap()));
       return [];
     }
     return gameResult.data.map((m) => Game.fromMap(m)).toList();

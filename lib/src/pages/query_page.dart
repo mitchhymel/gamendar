@@ -28,6 +28,6 @@ class QueryPage extends StatelessWidget {
     pageRequest: _requestData,
     widgetAdapter: _getWidget,
     pageSize: 25,
-    maxLimit: 250,
+    maxLimit: 150,
   );
 }

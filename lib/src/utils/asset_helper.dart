@@ -12,7 +12,7 @@ class AssetHelper {
       return null;
     }
 
-    return IGDBClient.getImageUrl(image.imageId, IGDBImageSizes.HD720P,
+    return IGDBHelpers.getImageUrl(image.imageId, IGDBImageSizes.HD720P,
       isRetina: true);
   }
 }
