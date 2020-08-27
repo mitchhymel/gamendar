@@ -121,7 +121,7 @@ class _DetailsPageContainerState extends State<DetailsPageContainer> with Single
               return <Widget>[
                 SliverOverlapAbsorber(
                   handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
-                  child: _getCustomAppBar(context, game),
+                  sliver: _getCustomAppBar(context, game),
                 )
               ];
             },

@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/gamendar.iml" filepath="$PROJECT_DIR$/gamendar.iml" />
       <module fileurl="file://$PROJECT_DIR$/android/gamendar_android.iml" filepath="$PROJECT_DIR$/android/gamendar_android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../igdb_client/igdb_client.iml" filepath="$PROJECT_DIR$/../igdb_client/igdb_client.iml" />
     </modules>
   </component>
 </project>
